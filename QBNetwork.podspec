@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source_files  = "QBNetwork/QBNetwork/**/*.{h,m}"
   s.requires_arc  = true
 
-  s.private_header_files = "QBNetwork/QBNetwork/Private/*"
+  s.private_header_files = "QBNetwork/QBNetwork/Private/*.h"
 
   s.ios.deployment_target = "9.0"
   s.osx.deployment_target = "10.10"
