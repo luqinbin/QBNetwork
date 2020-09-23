@@ -1,9 +1,8 @@
 //
 //  AppDelegate.m
-//  QBNetwork
+//  QBNetworkDemo
 //
-//  Created by 覃斌 卢    on 2020/9/10.
-//  Copyright © 2020 覃斌 卢   . All rights reserved.
+//  Created by 覃斌 卢    on 2020/9/22.
 //
 
 #import "AppDelegate.h"
@@ -17,7 +16,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     return YES;
 }
 

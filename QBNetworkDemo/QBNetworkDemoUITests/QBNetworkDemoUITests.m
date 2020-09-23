@@ -1,18 +1,17 @@
 //
-//  QBNetworkUITests.m
-//  QBNetworkUITests
+//  QBNetworkDemoUITests.m
+//  QBNetworkDemoUITests
 //
-//  Created by 覃斌 卢    on 2020/9/10.
-//  Copyright © 2020 覃斌 卢   . All rights reserved.
+//  Created by 覃斌 卢    on 2020/9/22.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface QBNetworkUITests : XCTestCase
+@interface QBNetworkDemoUITests : XCTestCase
 
 @end
 
-@implementation QBNetworkUITests
+@implementation QBNetworkDemoUITests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -39,7 +38,7 @@
 - (void)testLaunchPerformance {
     if (@available(macOS 10.15, iOS 13.0, tvOS 13.0, *)) {
         // This measures how long it takes to launch your application.
-        [self measureWithMetrics:@[XCTOSSignpostMetric.applicationLaunchMetric] block:^{
+        [self measureWithMetrics:@[[[XCTApplicationLaunchMetric alloc] init]] block:^{
             [[[XCUIApplication alloc] init] launch];
         }];
     }

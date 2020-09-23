@@ -6,7 +6,7 @@
 //  Copyright © 2020 覃斌 卢   . All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFURLResponseSerialization.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

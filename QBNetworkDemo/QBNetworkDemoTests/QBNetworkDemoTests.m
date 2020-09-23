@@ -1,18 +1,17 @@
 //
-//  QBNetworkTests.m
-//  QBNetworkTests
+//  QBNetworkDemoTests.m
+//  QBNetworkDemoTests
 //
-//  Created by 覃斌 卢    on 2020/9/10.
-//  Copyright © 2020 覃斌 卢   . All rights reserved.
+//  Created by 覃斌 卢    on 2020/9/22.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface QBNetworkTests : XCTestCase
+@interface QBNetworkDemoTests : XCTestCase
 
 @end
 
-@implementation QBNetworkTests
+@implementation QBNetworkDemoTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.

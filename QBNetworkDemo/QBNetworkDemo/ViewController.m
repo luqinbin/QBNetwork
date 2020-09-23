@@ -1,9 +1,8 @@
 //
 //  ViewController.m
-//  QBNetwork
+//  QBNetworkDemo
 //
-//  Created by 覃斌 卢    on 2020/9/10.
-//  Copyright © 2020 覃斌 卢   . All rights reserved.
+//  Created by 覃斌 卢    on 2020/9/22.
 //
 
 #import "ViewController.h"
