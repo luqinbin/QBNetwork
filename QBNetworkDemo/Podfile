@@ -3,7 +3,9 @@ use_frameworks!
 platform :ios, '11.0'
 
 target 'QBNetworkDemo' do
-    pod 'QBNetwork', path:'../../QBNetwork'
+
+ pod 'QBNetworking'
+
 end
 
 target 'QBNetworkDemoTests' do

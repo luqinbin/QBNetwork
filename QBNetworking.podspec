@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.private_header_files = "QBNetwork/Private/*.h"
 
-  s.ios.deployment_target = "9.0"
+  s.ios.deployment_target = "11.0"
   s.framework = "CFNetwork"
 
   s.dependency "AFNetworking/NSURLSession", "~> 4.0"
