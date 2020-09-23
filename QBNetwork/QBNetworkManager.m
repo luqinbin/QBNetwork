@@ -29,6 +29,8 @@
 @property (nonatomic) pthread_mutex_t lock;
 @property (strong, nonatomic) NSIndexSet *allStatusCodes;
 
+@property (nonatomic, assign) AFNetworkReachabilityStatus networkReachabilityStatus;
+
 @end
 
 @implementation QBNetworkManager
@@ -57,12 +59,49 @@
         }
         
         [self setupURLSessionManagerWithConfiguration:_configuration];
+        [self setupReachabilityManager];
     }
     
     return self;
 }
 
 #pragma mark - Public
+- (QBNetworkReachabilityStatus)networkStatus {
+    QBNetworkReachabilityStatus state = QBNetworkReachabilityStatusReachableViaWiFi;
+    AFNetworkReachabilityStatus reachabilityStatus = self.networkReachabilityStatus;
+    if (reachabilityStatus == AFNetworkReachabilityStatusUnknown || reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        reachabilityStatus = [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    }
+    switch (reachabilityStatus) {
+        case AFNetworkReachabilityStatusNotReachable:
+            state = QBNetworkReachabilityStatusNotReachable;
+            break;
+        case AFNetworkReachabilityStatusReachableViaWWAN:
+            state = QBNetworkReachabilityStatusReachableViaWWAN;
+            break;
+        case AFNetworkReachabilityStatusReachableViaWiFi:
+            state = QBNetworkReachabilityStatusReachableViaWiFi;
+            break;
+        case AFNetworkReachabilityStatusUnknown:
+        default:
+            state = QBNetworkReachabilityStatusNotReachable;
+            break;
+    }
+    return state;
+}
+
++ (QBNetworkReachabilityStatus)networkStatus {
+    return [[QBNetworkManager sharedInstance] networkStatus];
+}
+
+- (BOOL)isConnectNetwork {
+    return [AFNetworkReachabilityManager sharedManager].reachable;
+}
+
++ (BOOL)isConnectNetwork {
+    return [[QBNetworkManager sharedInstance] isConnectNetwork];
+}
+
 - (void)setupURLSessionManagerWithConfiguration:(QBNetworkConfiguration *)configuration {
     _configuration = configuration;
     _manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:_configuration.sessionConfiguration];
@@ -151,6 +190,16 @@
 }
 
 #pragma mark - Private
+#pragma mark -
+- (void)setupReachabilityManager {
+    __weak __typeof(self)weakSelf = self;
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        weakSelf.networkReachabilityStatus = status;
+    }];
+    [manager startMonitoring];
+}
+
 #pragma mark - Serializer
 - (AFHTTPRequestSerializer *)requestSerializerForRequest:(QBHttpRequest *)request {
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];

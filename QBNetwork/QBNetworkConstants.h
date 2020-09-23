@@ -25,6 +25,13 @@ NS_ENUM(NSInteger) {
 
 typedef void (^QBURLSessionTaskProgressBlock)(NSProgress *);
 
+typedef NS_ENUM(NSInteger, QBNetworkReachabilityStatus) {
+    QBNetworkReachabilityStatusUnknown          = -1,
+    QBNetworkReachabilityStatusNotReachable     = 0,
+    QBNetworkReachabilityStatusReachableViaWWAN = 1,
+    QBNetworkReachabilityStatusReachableViaWiFi = 2,
+};
+
 /// 请求类型
 typedef NS_ENUM(NSUInteger, QBRequestMethodType) {
     QBRequestMethodTypeGet,

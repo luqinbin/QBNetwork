@@ -35,6 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)cancelAllRequests;
 
 
+#pragma mark - networkStatus
+- (BOOL)isConnectNetwork;
++ (BOOL)isConnectNetwork;
++ (QBNetworkReachabilityStatus)networkStatus;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
