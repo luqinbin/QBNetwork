@@ -127,9 +127,15 @@ typedef void(^QBRequestCompletionBlock)(__kindof QBHttpRequest *request);
 
 #pragma mark - response info check
 ///  responseJSONObject 校验类型
+/// @note Subclass Override
 - (nullable id)jsonValidator;
 /// `responseStatusCode` 是否有效: 200 ~299.
 - (BOOL)statusCodeValidator;
+
+#pragma mark - response Preprocess
+/// @note Subclass Override
+- (void)requestCompletePreprocessor;
+- (void)requestFailedPreprocessor;
 
 #pragma mark -
 - (void)setCompletionBlockWithSuccess:(nullable QBRequestCompletionBlock)success failure:(nullable QBRequestCompletionBlock)failure;

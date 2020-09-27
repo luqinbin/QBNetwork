@@ -422,9 +422,12 @@
 
 - (void)requestDidSucceedWithRequest:(QBHttpRequest *)request {
     QBNetworkLog(@"Request: %@ success", NSStringFromClass([request class]));
+    @autoreleasepool {
+        [request requestCompletePreprocessor];
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self toggleAccessoriesWillStopCallBack];
+        [request toggleAccessoriesWillStopCallBack];
         
         if (request.delegate != nil) {
             [request.delegate requestFinished:request];
@@ -434,7 +437,7 @@
             request.successCompletionBlock(request);
         }
         
-        [self toggleAccessoriesDidStopCallBack];
+        [request toggleAccessoriesDidStopCallBack];
     });
 }
 
@@ -444,9 +447,12 @@
     QBNetworkLog(@"Request %@ failed, error code = %ld, error = %@",
                  NSStringFromClass([request class]), (long)error.code, error.localizedDescription
                  );
+    @autoreleasepool {
+        [request requestFailedPreprocessor];
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self toggleAccessoriesWillStopCallBack];
+        [request toggleAccessoriesWillStopCallBack];
         
         if (request.delegate != nil) {
             [request.delegate requestFailed:request];
@@ -456,7 +462,7 @@
             request.failureCompletionBlock(request);
         }
         
-        [self toggleAccessoriesDidStopCallBack];
+        [request toggleAccessoriesDidStopCallBack];
     });
 }
 
