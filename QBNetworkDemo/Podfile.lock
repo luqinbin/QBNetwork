@@ -6,11 +6,11 @@ PODS:
   - AFNetworking/Reachability (4.0.1)
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
-  - QBNetworking (0.0.2):
-    - AFNetworking/NSURLSession (~> 4.0)
+  - QBNetworking (0.0.4):
+    - AFNetworking/NSURLSession (>= 4.0)
 
 DEPENDENCIES:
-  - QBNetworking (from `../../QBNetwork`)
+  - QBNetworking (from `../`)
 
 SPEC REPOS:
   trunk:
@@ -18,12 +18,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   QBNetworking:
-    :path: "../../QBNetwork"
+    :path: "../"
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  QBNetworking: eb7bf56849c3047e1e85b548de2a65e69a1938d7
+  QBNetworking: 3bcc1e0e3e53dc455f0d2368c571f8b194e55fa6
 
-PODFILE CHECKSUM: 127df0a12b42432e6bf4b0d1ffae703fc9ee8419
+PODFILE CHECKSUM: 0392af6ed04d1154e5bc7010b6a1bf0710f30a59
 
 COCOAPODS: 1.9.3

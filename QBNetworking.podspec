@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "QBNetworking"
-  s.version      = "0.0.3"
+  s.version      = "0.0.5"
   s.summary      = "QBNetworking is a high level request util based on AFNetworking."
   s.homepage     = "https://github.com/luqinbin/QBNetworking"
   s.license      = "MIT"
@@ -17,5 +17,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "11.0"
   s.framework = "CFNetwork"
 
-  s.dependency "AFNetworking/NSURLSession", "~> 4.0"
+  s.dependency "AFNetworking/NSURLSession", ">= 4.0"
 end

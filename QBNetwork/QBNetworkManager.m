@@ -157,7 +157,13 @@
         
         [self addExecutingRequest:request forKey:[self requestCacheKey:request.requestTask] repeatCancel:YES];
         
-        [request toggleAccessoriesWillStartCallBack];
+        if ([[NSThread currentThread] isMainThread]) {
+            [request toggleAccessoriesWillStartCallBack];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [request toggleAccessoriesWillStartCallBack];
+            });
+        }
         
         [request.requestTask resume];
     }
@@ -167,18 +173,14 @@
     NSParameterAssert(request != nil);
     
     if (request.resumableDownloadPath && [self incompleteDownloadTempPathForDownloadPath:request.resumableDownloadPath] != nil) {
-        [request toggleAccessoriesWillStopCallBack];
         NSURLSessionDownloadTask *requestTask = (NSURLSessionDownloadTask *)request.requestTask;
         [requestTask cancelByProducingResumeData:^(NSData *resumeData) {
             NSURL *localUrl = [self incompleteDownloadTempPathForDownloadPath:request.resumableDownloadPath];
             [resumeData writeToURL:localUrl atomically:YES];
         }];
-        [request toggleAccessoriesDidStopCallBack];
     } else {
-        [request toggleAccessoriesWillStopCallBack];
         NSString *key = [self requestCacheKey:request.requestTask];
         [self cancelExecutingRequestWithKey:key];
-        [request toggleAccessoriesDidStopCallBack];
     }
 }
 
@@ -422,6 +424,8 @@
     QBNetworkLog(@"Request: %@ success", NSStringFromClass([request class]));
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self toggleAccessoriesWillStopCallBack];
+        
         if (request.delegate != nil) {
             [request.delegate requestFinished:request];
         }
@@ -429,6 +433,8 @@
         if (request.successCompletionBlock) {
             request.successCompletionBlock(request);
         }
+        
+        [self toggleAccessoriesDidStopCallBack];
     });
 }
 
@@ -440,6 +446,8 @@
                  );
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self toggleAccessoriesWillStopCallBack];
+        
         if (request.delegate != nil) {
             [request.delegate requestFailed:request];
         }
@@ -447,6 +455,8 @@
         if (request.successCompletionBlock) {
             request.failureCompletionBlock(request);
         }
+        
+        [self toggleAccessoriesDidStopCallBack];
     });
 }
 
