@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "QBNetworking"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "QBNetworking is a high level request util based on AFNetworking."
   s.homepage     = "https://github.com/luqinbin/QBNetworking"
   s.license      = "MIT"
